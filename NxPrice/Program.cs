@@ -15,12 +15,12 @@ namespace NxPrice
             NxPriceMain main = new NxPriceMain();
             main.Start();
 
-/*
+            /*
             FileDb db = new FileDb();
 
             db.TargetRecords = new List<TargetRecord>()
             {
-                new TargetRecord(){ Name = "LightAir 50 Surface", PullingIntervalSec = 60*30, Url = "http://www.amazon.de/Lightair-1015674-LightAir-IonFlow-Surface/dp/B000Z24WGQ/ref=sr_1_2?ie=UTF8&qid=1453222178&sr=8-2&keywords=lightair", WebSite=WebSite.Amazon}
+                new TargetRecord(){ Name = "LightAir 50 Surface", PullingIntervalSec = 60*30, Url = "http://www.amazon.de/Brita-Wasserfilter-Jahrespackung-mitternachtsblau-Edition/dp/B001EHF29W/ref=pd_sim_60_5?ie=UTF8&dpID=419P8YuAvsL&dpSrc=sims&preST=_AC_UL160_SR160%2C160_&refRID=1EH58MCDHQH5EDPFKEAX", WebSite=WebSite.Amazon}
             };
 
             var engine = new FileDbEngine<FileDb>();

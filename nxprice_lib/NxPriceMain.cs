@@ -16,6 +16,8 @@ namespace nxprice_lib
 
             mgr.Start();
 
+            Console.ReadKey();
+
         }
 
     }

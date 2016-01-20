@@ -42,14 +42,13 @@ namespace nxprice_data
 
         public T LoadFileDB()
         {
-            if (db == null)
-            {
-                FileInfo fileInfo = new FileInfo(this.fileDbPath);
 
-                var bytes = fileInfo.ReadBinary();
+            FileInfo fileInfo = new FileInfo(this.fileDbPath);
 
-                db = FormatterMg.XMLDerObjectFromBytes(typeof(T), bytes) as T;
-            }
+            var bytes = fileInfo.ReadBinary();
+
+            db = FormatterMg.XMLDerObjectFromBytes(typeof(T), bytes) as T;
+            
 
             return db;
         }
@@ -84,6 +83,10 @@ namespace nxprice_data
     [Serializable]
     public class FileDb
     {
+        public int TimerInterval { get; set; }
+
+        public EmailConfig EmailConfig { get; set; }
+
         private List<TargetRecord> targetRecords;
 
         public List<TargetRecord> TargetRecords
@@ -92,4 +95,14 @@ namespace nxprice_data
             set { targetRecords = value; }
         }
     }
+
+    [Serializable]
+    public class EmailConfig
+    {
+        public string GmailSmtp { get; set; }
+        public int GmailPort { get; set; }
+        public string GmailAccount { get; set; }
+        public string GmailPassword { get; set; }
+    }
+
 }

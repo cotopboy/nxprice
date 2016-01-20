@@ -16,5 +16,19 @@ namespace nxprice_data
 
         public int PullingIntervalSec { get; set; }
 
+        public DateTime LastChangedTime { get; set; }
+            
+        public string LastStatus { get; set; }
+
+        public List<HistoryItem> HistoryItems { get; set; }
+
+    }
+
+    [Serializable]
+    public class HistoryItem
+    {
+        public DateTime Time { get;set; }
+
+        public string Status  { get;set;}
     }
 }
