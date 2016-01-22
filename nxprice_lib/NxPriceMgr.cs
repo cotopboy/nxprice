@@ -51,9 +51,12 @@ namespace nxprice_lib
 
             foreach (var targetRecord in this.db.TargetRecords)
             {
-                IRobot robot = this.factory.CreateRobot(targetRecord.WebSite,this.container);
+                if (targetRecord.IsEnabled)
+                {
+                    IRobot robot = this.factory.CreateRobot(targetRecord.WebSite, this.container);
 
-                robot.DoJob(targetRecord);
+                    robot.DoJob(targetRecord);
+                }
             }
 
 

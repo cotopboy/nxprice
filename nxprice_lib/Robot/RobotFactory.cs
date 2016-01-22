@@ -14,6 +14,8 @@ namespace nxprice_lib.Robot
         {
             if (webSite == WebSite.Amazon) return container.Resolve<AmazonRobot>();
 
+            if (webSite == WebSite.ZhaoCaiBao) return container.Resolve<ZhaoCaiBaoRobot>();
+
             return null;
         }
     }

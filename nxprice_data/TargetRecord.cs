@@ -8,6 +8,8 @@ namespace nxprice_data
     [Serializable]
     public class TargetRecord
     {
+        public bool IsEnabled { get; set; }
+
         public string Name { get; set; }
 
         public string Url { get; set; }

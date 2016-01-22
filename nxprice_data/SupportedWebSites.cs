@@ -8,6 +8,7 @@ namespace nxprice_data
     public enum WebSite
     {
         None, 
+        ZhaoCaiBao,
         Amazon,
         Ebay
     }

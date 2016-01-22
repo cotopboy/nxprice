@@ -20,19 +20,15 @@ using System.Net.Mail;
 
 namespace nxprice_lib.Robot
 {
-    public class AmazonRobot : IRobot
+    public class AmazonRobot : Robot,IRobot
     {
-        private TargetRecord jobInfo = null;
 
-        private FileDb db;
-
-
-        public AmazonRobot(FileDb db)
+        public AmazonRobot(FileDb db) : base(db)
         {
-            this.db = db;
+           
         }
 
-        public void DoJob(TargetRecord jobInfo)
+        public override void DoJob(TargetRecord jobInfo)
         {
             this.jobInfo = jobInfo;
             this.StartProcess(jobInfo);
@@ -42,7 +38,7 @@ namespace nxprice_lib.Robot
         {
             try
             {
-                string pageHtml = GetPageHtml(jobInfo);
+                string pageHtml = GetPageHtml(jobInfo.Url, false,Encoding.Default);
                 HtmlNode priceblock_ourprice = GetPriceBlock(pageHtml);
 
                 string currentStatus = GetCurrentStatus(priceblock_ourprice);
@@ -76,29 +72,6 @@ namespace nxprice_lib.Robot
                 Console.WriteLine(webEx.Message.ToString());
             }
 
-
-        }
-
-        private void SendMessage(TargetRecord jobInfo)
-        {
-            System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();
-
-            msg.To.Add("2777888@qq.com");
-
-            msg.From = new MailAddress("nxdaigou@gmail.com", "Nx-Daigou Luebeck", System.Text.Encoding.UTF8);
-
-            msg.Subject = jobInfo.Name + "=="+ jobInfo.LastStatus;
-            msg.SubjectEncoding = System.Text.Encoding.UTF8;
-            msg.Body = msg.Subject;
-
-
-            var client = new SmtpClient(this.db.EmailConfig.GmailSmtp, this.db.EmailConfig.GmailPort)
-            {
-                Credentials = new NetworkCredential(this.db.EmailConfig.GmailAccount, this.db.EmailConfig.GmailPassword),
-                EnableSsl = true
-            };
-
-            client.Send(msg);
         }
 
         private string GetCurrentStatus(HtmlNode priceblock_ourprice)
@@ -107,9 +80,8 @@ namespace nxprice_lib.Robot
             else return priceblock_ourprice.InnerHtml;
         }
 
-        private static HtmlNode GetPriceBlock(string pageHtml)
+        private  HtmlNode GetPriceBlock(string pageHtml)
         {
-
             var doc = new HtmlDocument();
             doc.LoadHtml(pageHtml);
 
@@ -117,18 +89,7 @@ namespace nxprice_lib.Robot
             return priceblock_ourprice;
         }
 
-        private static string GetPageHtml(TargetRecord jobInfo)
-        {
-            WebClient MyWebClient = new WebClient();
-
-            MyWebClient.Credentials = CredentialCache.DefaultCredentials;
-
-            Byte[] pageData = MyWebClient.DownloadData(jobInfo.Url);
-
-            string pageHtml = Encoding.Default.GetString(pageData);  //如果获取网站页面采用的是GB2312，则使用这句            
-            //string pageHtml = Encoding.UTF8.GetString(pageData);   //如果获取网站页面采用的是UTF-8，则使用这句
-            return pageHtml;
-        }
+     
 
      
     }

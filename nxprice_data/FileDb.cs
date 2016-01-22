@@ -87,6 +87,8 @@ namespace nxprice_data
 
         public EmailConfig EmailConfig { get; set; }
 
+        public WebProxyConfig WebProxy { get; set; }
+
         private List<TargetRecord> targetRecords;
 
         public List<TargetRecord> TargetRecords
@@ -94,6 +96,15 @@ namespace nxprice_data
             get { return targetRecords; }
             set { targetRecords = value; }
         }
+    }
+
+
+    [Serializable]
+    public class WebProxyConfig
+    {        
+        public bool IsEnablded{ get; set; }
+        public string UserName { get; set; }
+        public string Password { get; set; }
     }
 
     [Serializable]
