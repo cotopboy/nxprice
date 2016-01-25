@@ -10,27 +10,44 @@ namespace nxprice_lib.Robot
     {
         public string GetPageHtml(string url, bool isUseProxy,string proxyUserName,string proxyPassowrd, Encoding encoding = null)
         {
-            WebClient MyWebClient = new WebClient();
 
-            MyWebClient.Credentials = CredentialCache.DefaultCredentials;
+            bool isNeedRetry = true;
+            int tryCount = 0;
 
-            if (isUseProxy)
+            while (isNeedRetry && tryCount <= 3)
             {
-                WebProxy myProxy = new WebProxy();
-                Uri newUri = new Uri("http://node-fr.vnet.link:210");
-                myProxy.Address = newUri;
-                myProxy.Credentials = new NetworkCredential(proxyUserName,proxyPassowrd);
-                MyWebClient.Proxy = myProxy;
+                try
+                {
+                    WebClient MyWebClient = new WebClient();
 
+                    MyWebClient.Credentials = CredentialCache.DefaultCredentials;
+
+                    if (isUseProxy)
+                    {
+                        WebProxy myProxy = new WebProxy();
+                        Uri newUri = new Uri("http://node-fr.vnet.link:210");
+                        myProxy.Address = newUri;
+                        myProxy.Credentials = new NetworkCredential(proxyUserName, proxyPassowrd);
+                        MyWebClient.Proxy = myProxy;
+
+                    }
+
+                    Byte[] pageData = MyWebClient.DownloadData(url);
+
+                    if (encoding == null) encoding = Encoding.UTF8;
+
+                    string pageHtml = encoding.GetString(pageData);
+
+                    return pageHtml;
+                }
+                catch
+                {
+                    tryCount++;
+                }
             }
 
-            Byte[] pageData = MyWebClient.DownloadData(url);
-
-            if (encoding == null) encoding = Encoding.UTF8;
-        
-            string pageHtml = encoding.GetString(pageData); 
-
-            return pageHtml;
+            return "";
+            
         }
 
     }
