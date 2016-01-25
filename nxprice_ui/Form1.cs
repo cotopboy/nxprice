@@ -9,25 +9,29 @@ using System.Windows.Forms;
 using System.IO;
 using Utilities.IO;
 using mshtml;
+using Microsoft.Practices.Unity;
+using nxprice_lib;
+using nxprice_data;
 
 namespace nxprice_ui
 {
     public partial class Form1 : Form
     {
         FileSystemWatcher fileWatcher;
+        private List<ZCBRecord> list;
 
         public Form1()
         {
             InitializeComponent();
 
-            fileWatcher = new FileSystemWatcher(DirectoryHelper.CombineWithCurrentExeDir("ZcbExchange"));
+            fileWatcher = new FileSystemWatcher(DirectoryHelper.CombineWithCurrentExeDir("ZcbListExchange"));
             fileWatcher.Created += new FileSystemEventHandler(FileWatcherOnFileCreated);
             fileWatcher.EnableRaisingEvents = true;
 
             this.webBrowser1.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(webBrowser1_DocumentCompleted);
         }
 
-        void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
             if (e.Url.AbsoluteUri.Contains("zhaocaibao.alipay.com/pf/purchase.htm?productId="))
             {
@@ -45,13 +49,18 @@ namespace nxprice_ui
         }
 
         private void FileWatcherOnFileCreated(object sender, FileSystemEventArgs e)
-        {
-            string productId = e.Name;
+        {          
+            FileDbEngine<List<ZCBRecord>> db = new FileDbEngine<List<ZCBRecord>>(e.FullPath);
+            list = db.LoadFileDB();
 
             this.Invoke((MethodInvoker)(() => 
             {
-                this.tbProductId.Text = productId;
-                this.webBrowser1.Navigate("https://zhaocaibao.alipay.com/pf/purchase.htm?productId=" + productId);
+
+
+                this.dataGridView1.DataSource = list;
+                
+                this.tbProductId.Text = list.First().ProductionID;
+                this.webBrowser1.Navigate("https://zhaocaibao.alipay.com/pf/purchase.htm?productId=" + this.tbProductId.Text);
             }));
 
             try
@@ -61,9 +70,29 @@ namespace nxprice_ui
             }catch{}
         }
 
-        private void btnGoBuy_Click(object sender, EventArgs e)
+        private void BtnRefresh_Click(object sender, EventArgs e)
         {
-            this.webBrowser1.Navigate("https://zhaocaibao.alipay.com/pf/purchase.htm?productId=" + this.tbProductId.Text);
+            new Action(() =>
+            {
+                UnityContainer nx = new UnityContainer();
+
+                var mgr = nx.Resolve<NxPriceMgr>();
+
+                mgr.StartOnce();
+
+            }).BeginInvoke(null, null);
         }
+
+        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int index = e.RowIndex;
+
+            var selectedItem = this.list[index];
+            this.tbProductId.Text = selectedItem.ProductionID;
+            this.webBrowser1.Navigate("https://zhaocaibao.alipay.com/pf/purchase.htm?productId=" + this.tbProductId.Text);
+
+        }
+
+      
     }
 }

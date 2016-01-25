@@ -16,6 +16,7 @@ namespace nxprice_lib
         private Timer timer;
         private RobotFactory factory;
         private bool isBusy = false;
+        private bool isInitialize = false;
         private UnityContainer container;
 
         public NxPriceMgr(RobotFactory factory,UnityContainer container)
@@ -24,6 +25,12 @@ namespace nxprice_lib
             this.container.RegisterInstance(container);
             this.factory = factory;
             this.dbEngine = new FileDbEngine<FileDb> ();                       
+        }
+
+        public void StartOnce()
+        {
+            Initialize();
+            TimerElapsedHandler(null, null);
         }
 
         public void Start()
@@ -38,10 +45,13 @@ namespace nxprice_lib
 
         private void Initialize()
         {
+            if (this.isInitialize) return;
+            
             this.db = this.dbEngine.LoadFileDB();
             this.container.RegisterInstance<FileDb>(db);
             this.timer = new Timer(this.db.TimerInterval);
             this.timer.Elapsed += new ElapsedEventHandler(TimerElapsedHandler);
+            this.isInitialize = true;
         }
 
         private void TimerElapsedHandler(object sender, ElapsedEventArgs e)

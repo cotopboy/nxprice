@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Globalization;
 
-namespace nxprice_lib.Robot.ZhaoCaiBao
+namespace nxprice_data
 {
+    [Serializable]
     public class ZCBRecord
     {
         public int PageIndex { get; set; }
@@ -20,14 +21,16 @@ namespace nxprice_lib.Robot.ZhaoCaiBao
 
         public string ProductionID { get; set; }
 
-        public double BuyIndex
+        public double BuyIndex  { get; set; }
+
+
+        public ZCBRecord()
         {
-            get { return YearRate / (DayLeft - 184.0) * 1000 + MinMount / 100.0; }
+
         }
 
         public ZCBRecord(string yearRateRaw, string dayLeftRaw, string minMountRaw, int pageIndex, string dealCount, string productionID)
         {
-
             this.ProductionID = productionID;
 
             this.YearRate = double.Parse(yearRateRaw.Replace("%", ""), CultureInfo.InvariantCulture);
@@ -40,6 +43,7 @@ namespace nxprice_lib.Robot.ZhaoCaiBao
 
             this.PageIndex = pageIndex;
 
+            this.BuyIndex = YearRate / (DayLeft - 184.0) * 1000 + MinMount / 100.0; 
         }
     }
 }

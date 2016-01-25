@@ -54,7 +54,6 @@ namespace nxprice_lib.Robot
 
             for (int i = 1; i <= this.zcbFileDb.MaxPageCount; i++)
             {
-
                 if (EventList.Count == this.zcbFileDb.MaxThreadCount )
                 {
                     int index = WaitHandle.WaitAny(EventList.ToArray());
@@ -67,9 +66,7 @@ namespace nxprice_lib.Robot
                 EventList.Add(pageProcessor.EventHandle);
                 
                 new Action(pageProcessor.GetPageRecord).BeginInvoke(null, null);
-
             }
-
             WaitHandle.WaitAll(EventList.ToArray());
 
 
@@ -115,10 +112,27 @@ namespace nxprice_lib.Robot
                 SaveHistory(first);
             }
 
-            if (first.BuyIndex > this.zcbFileDb.BuyIndexLimit)
-            {
-                ExportToBuyUi(first);
-            }
+            ExportListToBuyUi(HittedRecord);
+
+            
+        }
+
+        private void ExportListToBuyUi(List<ZCBRecord> list)
+        {
+            string dirExchange = DirectoryHelper.CombineWithCurrentExeDir("ZcbListExchange");
+            if (!Directory.Exists(dirExchange)) Directory.CreateDirectory(dirExchange);
+
+            string filePath = Path.Combine(dirExchange, "list.xml");
+
+            FileInfo file = new FileInfo(filePath);
+            if (file.Exists) file.Delete();
+
+            
+            var dbEngine = new FileDbEngine<List<ZCBRecord>>(filePath);
+            dbEngine.SetDB(list);
+
+            dbEngine.Save();
+
         }
 
         private void ExportToBuyUi(ZCBRecord first)

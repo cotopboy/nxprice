@@ -53,7 +53,7 @@ namespace nxprice_data
             return db;
         }
 
-        public void Save()
+        public void Save(bool isBackup = true)
         {
             Byte[] bytes = this.db.ObjectToBlob();
 
@@ -63,17 +63,20 @@ namespace nxprice_data
 
             xf.Save(x, Encoding.UTF8);
 
-            string basePath = Path.GetDirectoryName(this.fileDbPath);
-            string backupPath = Path.Combine(basePath,"db_backup");
+            if (isBackup)
+            {
+                string basePath = Path.GetDirectoryName(this.fileDbPath);
+                string backupPath = Path.Combine(basePath, "db_backup");
 
-            string zipFileName = "db_" + DateTime.Now.ToString("yyyy_MMdd_HHmm") + "_.zip";
-            string zipFileFullpath = Path.Combine(backupPath, zipFileName);
+                string zipFileName = "db_" + DateTime.Now.ToString("yyyy_MMdd_HHmm") + "_.zip";
+                string zipFileFullpath = Path.Combine(backupPath, zipFileName);
 
-            if (!Directory.Exists(backupPath)) Directory.CreateDirectory(backupPath);
-            
-            ZipFile zip = new ZipFile(zipFileFullpath, true);
-            zip.AddFile(this.fileDbPath); 
-            zip.Dispose();
+                if (!Directory.Exists(backupPath)) Directory.CreateDirectory(backupPath);
+
+                ZipFile zip = new ZipFile(zipFileFullpath, true);
+                zip.AddFile(this.fileDbPath);
+                zip.Dispose();
+            }
            
         }
 

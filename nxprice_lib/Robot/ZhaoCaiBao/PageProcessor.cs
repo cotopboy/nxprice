@@ -5,6 +5,11 @@ using System.Text;
 using nxprice_data;
 using HtmlAgilityPack;
 using System.Threading;
+using Utilities.DataTypes.ExtensionMethods;
+using Utilities.IO.ExtensionMethods;
+using Utilities.Reflection.ExtensionMethods;
+using Utilities.Math.ExtensionMethods;
+
 
 namespace nxprice_lib.Robot.ZhaoCaiBao
 {
@@ -16,13 +21,19 @@ namespace nxprice_lib.Robot.ZhaoCaiBao
         private TargetRecord jobInfo;
         private PageLoader pageLoader;
         private FileDb db;
+        private MaxiPageMgr maxiPageMgr;
 
         private List<ZCBRecord> RecordList = new List<ZCBRecord>();
 
         private List<ZCBRecord> retRecordListRef;
 
-        public PageProcessor(int pageIndex,TargetRecord jobInfo,PageLoader pageLoader,FileDb db)
+        public PageProcessor(int pageIndex,
+                             TargetRecord jobInfo,
+                             PageLoader pageLoader,
+                             FileDb db,
+                             MaxiPageMgr maxiPageMgr)
         {
+            this.maxiPageMgr = maxiPageMgr;
             this.db = db;
             this.pageLoader = pageLoader;
             this.pageIndex = pageIndex;
@@ -40,8 +51,14 @@ namespace nxprice_lib.Robot.ZhaoCaiBao
         public void GetPageRecord()
         {
 
+            if (maxiPageMgr.MaxPageCount.HasValue && maxiPageMgr.MaxPageCount.Value < this.pageIndex)
+            {
+                this.EventHandle.Set();
+                return;
+            }
+
             string pageUrl = this.jobInfo.Url.Replace("#pageNum#", pageIndex.ToString());
-            string pageHtml = this.pageLoader.GetPageHtml(pageUrl, true,
+            string pageHtml = this.pageLoader.GetPageHtml(pageUrl, false,
                                                           this.db.WebProxy.UserName,
                                                           this.db.WebProxy.Password,
                                                           Encoding.GetEncoding("gb2312")
@@ -49,6 +66,20 @@ namespace nxprice_lib.Robot.ZhaoCaiBao
 
             var doc = new HtmlDocument();
             doc.LoadHtml(pageHtml);
+
+
+
+            try
+            {
+                string maxiPageCountContent = doc.DocumentNode
+                                    .SelectSingleNode("//*[@class='ui-paging-info']")
+                                    .SelectSingleNode(".//*[@class='ui-paging-bold']").InnerText;
+
+                int maxPageCount = maxiPageCountContent.SubStringAfter("/", 1).StrToInt();
+
+                maxiPageMgr.MaxPageCount = maxPageCount;
+            }
+            catch { }
 
             var nodes = doc.DocumentNode.Descendants("ul")
                          .Where(
