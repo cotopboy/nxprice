@@ -21,6 +21,7 @@ namespace nxprice_lib
         public NxPriceMgr(RobotFactory factory,UnityContainer container)
         {
             this.container = container;
+            this.container.RegisterInstance(container);
             this.factory = factory;
             this.dbEngine = new FileDbEngine<FileDb> ();                       
         }

@@ -51,9 +51,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Robot\AmazonRobot.cs" />
     <Compile Include="Robot\IRobot.cs" />
+    <Compile Include="Robot\PageLoader.cs" />
     <Compile Include="Robot\Robot.cs" />
     <Compile Include="Robot\RobotFactory.cs" />
     <Compile Include="Robot\ZhaoCaiBaoRobot.cs" />
+    <Compile Include="Robot\ZhaoCaiBao\PageProcessor.cs" />
+    <Compile Include="Robot\ZhaoCaiBao\PageProcessorFactory.cs" />
+    <Compile Include="Robot\ZhaoCaiBao\ZcbFileDb.cs" />
+    <Compile Include="Robot\ZhaoCaiBao\ZCBRecord.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\nxprice_data\nxprice_data.csproj">
