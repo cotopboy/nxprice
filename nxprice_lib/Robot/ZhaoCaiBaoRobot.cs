@@ -27,10 +27,12 @@ namespace nxprice_lib.Robot
         private List<ManualResetEvent> EventList = new List<ManualResetEvent>();
         private ZcbFileDb zcbFileDb = null;
         private PageProcessorFactory pageProcessorFactory;
+        private Speaker speaker;
 
-        public ZhaoCaiBaoRobot(FileDb db, PageProcessorFactory pageProcessorFactory) : base(db)
+        public ZhaoCaiBaoRobot(FileDb db, PageProcessorFactory pageProcessorFactory,Speaker speaker) : base(db)
         {
             this.pageProcessorFactory = pageProcessorFactory;
+            this.speaker = speaker;
         }
 
         public override void DoJob(TargetRecord jobInfo)
@@ -110,6 +112,7 @@ namespace nxprice_lib.Robot
             if (first != null)
             {
                 SaveHistory(first);
+                this.speaker.Say(first.BuyIndex.Round(0).ToString());
             }
 
             ExportListToBuyUi(HittedRecord);
