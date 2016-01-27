@@ -69,6 +69,7 @@ namespace nxprice_lib.Robot
                 
                 new Action(pageProcessor.GetPageRecord).BeginInvoke(null, null);
             }
+
             WaitHandle.WaitAll(EventList.ToArray());
 
 
@@ -86,6 +87,11 @@ namespace nxprice_lib.Robot
                                          .OrderByDescending(x=>x.BuyIndex)
                                          .Take(this.zcbFileDb.DisplayTopCount)
                                          .ToList();
+
+            var SecondHittedRecord = RecordList.Where(x => x.DayLeft <= this.zcbFileDb.DayLeftUpperLimit)
+                                                     .OrderByDescending(x => x.BuyIndex)
+                                                     .Take(this.zcbFileDb.DisplayTopCount)
+                                                     .ToList();
 
             Console.ForegroundColor = ConsoleColor.Green;
             
@@ -113,14 +119,29 @@ namespace nxprice_lib.Robot
             {
                 SaveHistory(first);
                 this.speaker.Say(first.BuyIndex.Round(0).ToString());
+
+                if (first.BuyIndex > 500)
+                {
+                    SendMessage("{0}页{1}项-{2}天-{3}%--系数{4:F2}".FormatAs(        
+                            first.PageIndex,
+                            first.ItemIndex,
+                            first.DayLeft,
+                            first.YearRate,
+                            first.BuyIndex));
+                }
             }
 
-            ExportListToBuyUi(HittedRecord);
+            ExchangeDataContainer exContainer = new ExchangeDataContainer();
+
+            exContainer.FisrtList = HittedRecord;
+            exContainer.SecondList = SecondHittedRecord;
+
+            ExportListToBuyUi(exContainer);
 
             
         }
 
-        private void ExportListToBuyUi(List<ZCBRecord> list)
+        private void ExportListToBuyUi(ExchangeDataContainer exContaienr)
         {
             string dirExchange = DirectoryHelper.CombineWithCurrentExeDir("ZcbListExchange");
             if (!Directory.Exists(dirExchange)) Directory.CreateDirectory(dirExchange);
@@ -130,9 +151,9 @@ namespace nxprice_lib.Robot
             FileInfo file = new FileInfo(filePath);
             if (file.Exists) file.Delete();
 
-            
-            var dbEngine = new FileDbEngine<List<ZCBRecord>>(filePath);
-            dbEngine.SetDB(list);
+
+            var dbEngine = new FileDbEngine<ExchangeDataContainer>(filePath);
+            dbEngine.SetDB(exContaienr);
 
             dbEngine.Save();
 

@@ -17,8 +17,8 @@ namespace nxprice_ui
 {
     public partial class Form1 : Form
     {
-        FileSystemWatcher fileWatcher;
-        private List<ZCBRecord> list;
+        FileSystemWatcher fileWatcher;        
+        private ExchangeDataContainer container;
 
         public Form1()
         {
@@ -49,29 +49,48 @@ namespace nxprice_ui
         }
 
         private void FileWatcherOnFileCreated(object sender, FileSystemEventArgs e)
-        {          
-            FileDbEngine<List<ZCBRecord>> db = new FileDbEngine<List<ZCBRecord>>(e.FullPath);
-            list = db.LoadFileDB();
+        {
+
+            FileDbEngine<ExchangeDataContainer> exContainerEngine = new FileDbEngine<ExchangeDataContainer>(e.FullPath);
+            this.container = exContainerEngine.LoadFileDB();
 
             this.Invoke((MethodInvoker)(() => 
             {
+                if (this.cbIgnoreRefresh.Checked) return;
 
+                this.dataGridView1.DataSource = container.FisrtList;
+                this.dataGridView2.DataSource = container.SecondList;
 
-                this.dataGridView1.DataSource = list;
-                
-                this.tbProductId.Text = list.First().ProductionID;
+                this.tbProductId.Text = container.FisrtList.First().ProductionID;
                 this.webBrowser1.Navigate("https://zhaocaibao.alipay.com/pf/purchase.htm?productId=" + this.tbProductId.Text);
+
+                try
+                {
+                    File.Delete(e.FullPath);
+                }
+                catch { }
+
             }));
 
-            try
-            {
-                File.Delete(e.FullPath);
-
-            }catch{}
+           
         }
 
         private void BtnRefresh_Click(object sender, EventArgs e)
         {
+            try
+            {
+                string filePath = DirectoryHelper.CombineWithCurrentExeDir("ZcbListExchange\\list.xml");
+                FileDbEngine<ExchangeDataContainer> exContainerEngine = new FileDbEngine<ExchangeDataContainer>(filePath);
+                this.container = exContainerEngine.LoadFileDB();
+
+                this.dataGridView1.DataSource = container.FisrtList;
+                this.dataGridView2.DataSource = container.SecondList;
+
+                this.tbProductId.Text = container.FisrtList.First().ProductionID;
+                this.webBrowser1.Navigate("https://zhaocaibao.alipay.com/pf/purchase.htm?productId=" + this.tbProductId.Text);
+            }
+            catch { }
+
             new Action(() =>
             {
                 UnityContainer nx = new UnityContainer();
@@ -81,17 +100,33 @@ namespace nxprice_ui
                 mgr.StartOnce();
 
             }).BeginInvoke(null, null);
+
+
         }
 
-        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void dataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             int index = e.RowIndex;
 
-            var selectedItem = this.list[index];
+            DataGridView dg = sender as DataGridView;
+
+            List<ZCBRecord> list = null;
+            if ((string)dg.Tag == "1")
+            {
+                list = this.container.FisrtList;
+            }
+            else
+            {
+                list = this.container.SecondList;
+            }
+
+            var selectedItem = list[index];
             this.tbProductId.Text = selectedItem.ProductionID;
             this.webBrowser1.Navigate("https://zhaocaibao.alipay.com/pf/purchase.htm?productId=" + this.tbProductId.Text);
 
         }
+
+
 
       
     }

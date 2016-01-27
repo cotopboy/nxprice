@@ -62,6 +62,28 @@ namespace nxprice_lib.Robot
             return toString;
         }
 
+        protected void SendMessage(string Msg)
+        {
+            System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();
+
+            msg.To.Add("nxdaigou@gmail.com");
+
+            msg.From = new MailAddress("cotopboy@gmail.com", "招财宝", System.Text.Encoding.UTF8);
+
+            msg.Subject = Msg;
+            msg.SubjectEncoding = System.Text.Encoding.UTF8;
+            msg.Body ="";
+
+
+            var client = new SmtpClient(this.db.EmailConfig.GmailSmtp, this.db.EmailConfig.GmailPort)
+            {
+                Credentials = new NetworkCredential(this.db.EmailConfig.GmailAccount, this.db.EmailConfig.GmailPassword),
+                EnableSsl = true
+            };
+
+            client.Send(msg);
+        }
+
         protected void SendMessage(TargetRecord jobInfo)
         {
             System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();

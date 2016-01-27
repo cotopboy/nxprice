@@ -88,9 +88,11 @@ namespace nxprice_lib.Robot.ZhaoCaiBao
                                )
                          .ToList();
 
+            int index = 1;
             foreach (var targetNode in nodes)
             {
-                CheckSinleNode(targetNode);
+                CheckSinleNode(targetNode, index);
+                index++; 
             }
 
             lock (retListSyncObj)
@@ -102,7 +104,7 @@ namespace nxprice_lib.Robot.ZhaoCaiBao
 
         }
 
-        private void CheckSinleNode(HtmlNode targetNode)
+        private void CheckSinleNode(HtmlNode targetNode,int itemIndex)
         {
             string yearRate = targetNode.SelectSingleNode(".//*[contains(@class,'f-18')]").InnerText;
 
@@ -114,7 +116,7 @@ namespace nxprice_lib.Robot.ZhaoCaiBao
 
             string productionId = targetNode.Attributes["productid"].Value;
 
-            var record = new ZCBRecord(yearRate, dayLeft, minMount, this.pageIndex, dealCount, productionId);
+            var record = new ZCBRecord(yearRate, dayLeft, minMount, this.pageIndex, dealCount, productionId, itemIndex);
 
             RecordList.Add(record);
 

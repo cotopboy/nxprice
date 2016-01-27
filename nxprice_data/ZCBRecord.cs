@@ -23,13 +23,14 @@ namespace nxprice_data
 
         public double BuyIndex  { get; set; }
 
+        public int ItemIndex { get; set; }
 
         public ZCBRecord()
         {
 
         }
 
-        public ZCBRecord(string yearRateRaw, string dayLeftRaw, string minMountRaw, int pageIndex, string dealCount, string productionID)
+        public ZCBRecord(string yearRateRaw, string dayLeftRaw, string minMountRaw, int pageIndex, string dealCount, string productionID,int itemIndex)
         {
             this.ProductionID = productionID;
 
@@ -43,7 +44,9 @@ namespace nxprice_data
 
             this.PageIndex = pageIndex;
 
-            this.BuyIndex = YearRate / (DayLeft - 184.0) * 1000 + MinMount / 100.0; 
+            this.BuyIndex = YearRate / (DayLeft - 184.0) * 1000 + MinMount / 100.0;
+
+            this.ItemIndex = itemIndex;
         }
     }
 }

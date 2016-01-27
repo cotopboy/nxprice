@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Event\OnNewResultHandler.cs" />
+    <Compile Include="ExchangeDataContainer.cs" />
     <Compile Include="FileDb.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SupportedWebSites.cs" />
