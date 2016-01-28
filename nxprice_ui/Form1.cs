@@ -50,23 +50,34 @@ namespace nxprice_ui
 
         private void FileWatcherOnFileCreated(object sender, FileSystemEventArgs e)
         {
+            if (e.FullPath.Contains(".temp")) return;
+                
+            string temp = e.FullPath + ".temp";
 
-            FileDbEngine<ExchangeDataContainer> exContainerEngine = new FileDbEngine<ExchangeDataContainer>(e.FullPath);
+            try
+            {
+                if(File.Exists(temp)) File.Delete(temp);
+                File.Copy(e.FullPath, temp);
+            }catch{}
+
+            FileDbEngine<ExchangeDataContainer> exContainerEngine = new FileDbEngine<ExchangeDataContainer>(temp);
             this.container = exContainerEngine.LoadFileDB();
 
             this.Invoke((MethodInvoker)(() => 
             {
                 if (this.cbIgnoreRefresh.Checked) return;
-
-                this.dataGridView1.DataSource = container.FisrtList;
-                this.dataGridView2.DataSource = container.SecondList;
-
-                this.tbProductId.Text = container.FisrtList.First().ProductionID;
-                this.webBrowser1.Navigate("https://zhaocaibao.alipay.com/pf/purchase.htm?productId=" + this.tbProductId.Text);
-
+                
                 try
                 {
+                    this.dataGridView1.DataSource = container.FisrtList;
+                    this.dataGridView2.DataSource = container.SecondList;
+
+                    this.tbProductId.Text = container.FisrtList.First().ProductionID;
+                    this.webBrowser1.Navigate("https://zhaocaibao.alipay.com/pf/purchase.htm?productId=" + this.tbProductId.Text);
+
+               
                     File.Delete(e.FullPath);
+                    File.Delete(temp);
                 }
                 catch { }
 
@@ -86,8 +97,13 @@ namespace nxprice_ui
                 this.dataGridView1.DataSource = container.FisrtList;
                 this.dataGridView2.DataSource = container.SecondList;
 
-                this.tbProductId.Text = container.FisrtList.First().ProductionID;
-                this.webBrowser1.Navigate("https://zhaocaibao.alipay.com/pf/purchase.htm?productId=" + this.tbProductId.Text);
+                var first = container.FisrtList.FirstOrDefault();
+
+                if (first != null)
+                {
+                    this.tbProductId.Text = container.FisrtList.First().ProductionID;
+                    this.webBrowser1.Navigate("https://zhaocaibao.alipay.com/pf/purchase.htm?productId=" + this.tbProductId.Text);
+                }
             }
             catch { }
 

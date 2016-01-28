@@ -22,6 +22,7 @@ namespace nxprice_lib.Robot.ZhaoCaiBao
         private PageLoader pageLoader;
         private FileDb db;
         private MaxiPageMgr maxiPageMgr;
+        private Speaker speaker;
 
         private List<ZCBRecord> RecordList = new List<ZCBRecord>();
 
@@ -31,8 +32,10 @@ namespace nxprice_lib.Robot.ZhaoCaiBao
                              TargetRecord jobInfo,
                              PageLoader pageLoader,
                              FileDb db,
-                             MaxiPageMgr maxiPageMgr)
+                             MaxiPageMgr maxiPageMgr,
+                             Speaker speaker)
         {
+            this.speaker = speaker;
             this.maxiPageMgr = maxiPageMgr;
             this.db = db;
             this.pageLoader = pageLoader;
@@ -59,10 +62,13 @@ namespace nxprice_lib.Robot.ZhaoCaiBao
 
             string pageUrl = this.jobInfo.Url.Replace("#pageNum#", pageIndex.ToString());
             string pageHtml = this.pageLoader.GetPageHtml(pageUrl, false,
+                                                          this.db.WebProxy.ProxyServer,
                                                           this.db.WebProxy.UserName,
                                                           this.db.WebProxy.Password,
                                                           Encoding.GetEncoding("gb2312")
                                                          );
+            Console.Beep(800,200);
+            this.speaker.Say(this.pageIndex.ToString());
 
             var doc = new HtmlDocument();
             doc.LoadHtml(pageHtml);

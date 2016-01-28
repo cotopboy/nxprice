@@ -120,7 +120,10 @@ namespace nxprice_lib.Robot
                 SaveHistory(first);
                 this.speaker.Say(first.BuyIndex.Round(0).ToString());
 
-                if (first.BuyIndex > 500)
+                if (
+                    this.zcbFileDb.BuyIndexSendEmailEnabled 
+                    && first.BuyIndex > this.zcbFileDb.BuyIndexSendEmailLimit
+                    )
                 {
                     SendMessage("{0}页{1}项-{2}天-{3}%--系数{4:F2}".FormatAs(        
                             first.PageIndex,
@@ -155,7 +158,7 @@ namespace nxprice_lib.Robot
             var dbEngine = new FileDbEngine<ExchangeDataContainer>(filePath);
             dbEngine.SetDB(exContaienr);
 
-            dbEngine.Save();
+            dbEngine.Save(false);
 
         }
 

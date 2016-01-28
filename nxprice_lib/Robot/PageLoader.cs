@@ -8,24 +8,24 @@ namespace nxprice_lib.Robot
 {
     public class PageLoader
     {
-        public string GetPageHtml(string url, bool isUseProxy,string proxyUserName,string proxyPassowrd, Encoding encoding = null)
+
+        public string GetPageHtml(string url, bool isUseProxy,string proxyServer,string proxyUserName,string proxyPassowrd, Encoding encoding = null)
         {
 
             bool isNeedRetry = true;
             int tryCount = 0;
 
-            while (isNeedRetry && tryCount <= 3)
+            while (isNeedRetry && tryCount < 1)
             {
                 try
                 {
                     WebClient MyWebClient = new WebClient();
-
                     MyWebClient.Credentials = CredentialCache.DefaultCredentials;
 
                     if (isUseProxy)
                     {
                         WebProxy myProxy = new WebProxy();
-                        Uri newUri = new Uri("http://node-fr.vnet.link:210");
+                        Uri newUri = new Uri(string.Format("http://node-{0}.vnet.link:210",proxyServer));
                         myProxy.Address = newUri;
                         myProxy.Credentials = new NetworkCredential(proxyUserName, proxyPassowrd);
                         MyWebClient.Proxy = myProxy;
@@ -43,6 +43,7 @@ namespace nxprice_lib.Robot
                 catch
                 {
                     tryCount++;
+                    Console.WriteLine("======================================================================");
                 }
             }
 

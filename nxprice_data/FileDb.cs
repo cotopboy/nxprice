@@ -106,6 +106,7 @@ namespace nxprice_data
     public class WebProxyConfig
     {        
         public bool IsEnablded{ get; set; }
+        public string ProxyServer { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
     }

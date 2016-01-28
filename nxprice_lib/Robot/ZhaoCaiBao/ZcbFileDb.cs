@@ -21,5 +21,9 @@ namespace nxprice_lib.Robot.ZhaoCaiBao
         public int DisplayTopCount { get; set; }
 
         public int BuyIndexLimit { get; set; }
+
+        public bool BuyIndexSendEmailEnabled { get; set; }
+
+        public int BuyIndexSendEmailLimit { get; set; }
     }
 }
