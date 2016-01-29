@@ -46,6 +46,7 @@
             this.tbProductId = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.cbIgnoreRefresh = new System.Windows.Forms.CheckBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.BtnRefresh = new System.Windows.Forms.Button();
@@ -71,7 +72,6 @@
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cbIgnoreRefresh = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -129,6 +129,16 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1279, 65);
             this.panel2.TabIndex = 3;
+            // 
+            // cbIgnoreRefresh
+            // 
+            this.cbIgnoreRefresh.AutoSize = true;
+            this.cbIgnoreRefresh.Location = new System.Drawing.Point(1014, 28);
+            this.cbIgnoreRefresh.Name = "cbIgnoreRefresh";
+            this.cbIgnoreRefresh.Size = new System.Drawing.Size(74, 17);
+            this.cbIgnoreRefresh.TabIndex = 5;
+            this.cbIgnoreRefresh.Text = "忽略更新";
+            this.cbIgnoreRefresh.UseVisualStyleBackColor = true;
             // 
             // pictureBox1
             // 
@@ -291,7 +301,7 @@
             // 
             this.buyIndexDataGridViewTextBoxColumn.DataPropertyName = "BuyIndex";
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            dataGridViewCellStyle1.Format = "N0";
+            dataGridViewCellStyle1.Format = "N2";
             dataGridViewCellStyle1.NullValue = null;
             this.buyIndexDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle1;
             this.buyIndexDataGridViewTextBoxColumn.HeaderText = "BuyIndex";
@@ -363,7 +373,7 @@
             // 
             this.dataGridViewTextBoxColumn1.DataPropertyName = "BuyIndex";
             dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            dataGridViewCellStyle7.Format = "N0";
+            dataGridViewCellStyle7.Format = "N2";
             dataGridViewCellStyle7.NullValue = null;
             this.dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle7;
             this.dataGridViewTextBoxColumn1.HeaderText = "BuyIndex";
@@ -431,16 +441,6 @@
             this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
             this.dataGridViewTextBoxColumn7.ReadOnly = true;
             // 
-            // cbIgnoreRefresh
-            // 
-            this.cbIgnoreRefresh.AutoSize = true;
-            this.cbIgnoreRefresh.Location = new System.Drawing.Point(1014, 28);
-            this.cbIgnoreRefresh.Name = "cbIgnoreRefresh";
-            this.cbIgnoreRefresh.Size = new System.Drawing.Size(74, 17);
-            this.cbIgnoreRefresh.TabIndex = 5;
-            this.cbIgnoreRefresh.Text = "忽略更新";
-            this.cbIgnoreRefresh.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -488,6 +488,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.CheckBox cbIgnoreRefresh;
         private System.Windows.Forms.DataGridViewTextBoxColumn buyIndexDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn dealCountDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn minMountDataGridViewTextBoxColumn;
@@ -502,7 +503,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
-        private System.Windows.Forms.CheckBox cbIgnoreRefresh;
     }
 }
 

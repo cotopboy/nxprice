@@ -44,9 +44,23 @@ namespace nxprice_data
 
             this.PageIndex = pageIndex;
 
-            this.BuyIndex = YearRate / (DayLeft - 184.0) * 1000 + MinMount / 100.0;
+            this.BuyIndex = (double)(this.GetBuyIndex((decimal)YearRate, (decimal)DayLeft));
 
             this.ItemIndex = itemIndex;
+        }
+
+        private decimal GetBuyIndex(decimal YearRate, decimal DayLeft,decimal momey = 10000)
+        {
+            decimal InputProfil = YearRate / 100m * (DayLeft) / 365m * momey;
+            decimal OutputProfil = 3.5m / 100m * 185 / 365m * momey;
+
+            decimal platformFee = momey * 0.2m / 100m;
+
+
+            decimal ret = InputProfil - OutputProfil - platformFee;
+
+            return ret / (DayLeft - 184m) / 10000m * 365m * 100;
+            
         }
     }
 }

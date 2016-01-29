@@ -126,7 +126,7 @@ namespace nxprice_lib.Robot.ZhaoCaiBao
 
             RecordList.Add(record);
 
-            Console.WriteLine("Page={0:D2}     Rate={1}        DayLeft={2}     MinMount={3}        BuyIndex={4:F1}              prouctionId={5}",
+            Console.WriteLine("Page={0:D2}     Rate={1}        DayLeft={2}     MinMount={3}        BuyIndex={4:F2}              prouctionId={5}",
                               this.pageIndex, yearRate, dayLeft, minMount, record.BuyIndex, record.ProductionID);
         }
 
