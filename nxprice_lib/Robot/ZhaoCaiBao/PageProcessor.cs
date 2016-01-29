@@ -67,13 +67,10 @@ namespace nxprice_lib.Robot.ZhaoCaiBao
                                                           this.db.WebProxy.Password,
                                                           Encoding.GetEncoding("gb2312")
                                                          );
-            Console.Beep(800,200);
-            this.speaker.Say(this.pageIndex.ToString());
+            Console.Beep(300,50);
 
             var doc = new HtmlDocument();
             doc.LoadHtml(pageHtml);
-
-
 
             try
             {

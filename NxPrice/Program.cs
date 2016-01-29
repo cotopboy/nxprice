@@ -14,6 +14,7 @@ namespace NxPrice
         {
             NxPriceMain main = new NxPriceMain();
             main.Start();
+            Console.ReadLine();
         }
     }
 }

@@ -12,6 +12,7 @@ using mshtml;
 using Microsoft.Practices.Unity;
 using nxprice_lib;
 using nxprice_data;
+using Utilities.IO.Logging;
 
 namespace nxprice_ui
 {
@@ -75,7 +76,7 @@ namespace nxprice_ui
                     this.tbProductId.Text = container.FisrtList.First().ProductionID;
                     this.webBrowser1.Navigate("https://zhaocaibao.alipay.com/pf/purchase.htm?productId=" + this.tbProductId.Text);
 
-               
+                    
                     File.Delete(e.FullPath);
                     File.Delete(temp);
                 }
@@ -88,25 +89,6 @@ namespace nxprice_ui
 
         private void BtnRefresh_Click(object sender, EventArgs e)
         {
-            try
-            {
-                string filePath = DirectoryHelper.CombineWithCurrentExeDir("ZcbListExchange\\list.xml");
-                FileDbEngine<ExchangeDataContainer> exContainerEngine = new FileDbEngine<ExchangeDataContainer>(filePath);
-                this.container = exContainerEngine.LoadFileDB();
-
-                this.dataGridView1.DataSource = container.FisrtList;
-                this.dataGridView2.DataSource = container.SecondList;
-
-                var first = container.FisrtList.FirstOrDefault();
-
-                if (first != null)
-                {
-                    this.tbProductId.Text = container.FisrtList.First().ProductionID;
-                    this.webBrowser1.Navigate("https://zhaocaibao.alipay.com/pf/purchase.htm?productId=" + this.tbProductId.Text);
-                }
-            }
-            catch { }
-
             new Action(() =>
             {
                 UnityContainer nx = new UnityContainer();
@@ -116,8 +98,6 @@ namespace nxprice_ui
                 mgr.StartOnce();
 
             }).BeginInvoke(null, null);
-
-
         }
 
         private void dataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -138,8 +118,49 @@ namespace nxprice_ui
 
             var selectedItem = list[index];
             this.tbProductId.Text = selectedItem.ProductionID;
-            this.webBrowser1.Navigate("https://zhaocaibao.alipay.com/pf/purchase.htm?productId=" + this.tbProductId.Text);
+            string url = "https://zhaocaibao.alipay.com/pf/purchase.htm?productId=" + this.tbProductId.Text;
+            this.webBrowser1.Navigate(url);
+            System.Diagnostics.Process.Start(url);
+        }
 
+        private void btnLoad_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string filePath = DirectoryHelper.CombineWithCurrentExeDir("ZcbListExchange\\list.xml");
+                FileDbEngine<ExchangeDataContainer> exContainerEngine = new FileDbEngine<ExchangeDataContainer>(filePath);
+                this.container = exContainerEngine.LoadFileDB();
+
+                this.dataGridView1.DataSource = container.FisrtList;
+                this.dataGridView2.DataSource = container.SecondList;
+
+                var first = container.FisrtList.FirstOrDefault();
+
+                if (first != null)
+                {
+                    this.tbProductId.Text = container.FisrtList.First().ProductionID;
+                    this.webBrowser1.Navigate("https://zhaocaibao.alipay.com/pf/purchase.htm?productId=" + this.tbProductId.Text);
+                }
+            }
+            catch { }
+        }
+
+        private void btnOpenByDefaultBrowser_Click(object sender, EventArgs e)
+        {
+            string url = "https://zhaocaibao.alipay.com/pf/purchase.htm?productId=" + this.tbProductId.Text;
+            System.Diagnostics.Process.Start(url);
+        }
+
+        private void cbConsole_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.cbConsole.Checked)
+            {
+                ConsoleManager.AllocConsole();
+            }
+            else
+            {
+                ConsoleManager.FreeConsole();
+            }
         }
 
 

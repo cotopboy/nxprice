@@ -21,9 +21,6 @@ namespace nxprice_lib
             var mgr = nx.Resolve<NxPriceMgr>();
              
             mgr.Start();
-
-            Console.ReadKey();
-
         }
 
     }

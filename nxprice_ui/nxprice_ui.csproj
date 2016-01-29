@@ -109,6 +109,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="currency_yuan.ico" />
+    <None Include="Resources\earth_find.png" />
     <None Include="Resources\currency_yuan.png" />
   </ItemGroup>
   <ItemGroup>

@@ -98,7 +98,7 @@ namespace nxprice_lib.Robot
             foreach (var item in HittedRecord)
             {
 
-                Console.WriteLine("Page={0:D2}     Rate={1}        DayLeft={2}     MinMount={3}        BuyIndex={4:F1}",
+                Console.WriteLine("Page={0:D2}     Rate={1}        DayLeft={2}     MinMount={3}        BuyIndex={4:F2}",
                                   item.PageIndex, item.YearRate, item.DayLeft, item.MinMount, item.BuyIndex);
       
             }
@@ -118,7 +118,7 @@ namespace nxprice_lib.Robot
             if (first != null)
             {
                 SaveHistory(first);
-                this.speaker.Say(first.BuyIndex.Round(0).ToString());
+                this.speaker.Say(first.BuyIndex.Round(1).ToString() +" %");
 
                 if (
                     this.zcbFileDb.BuyIndexSendEmailEnabled 
