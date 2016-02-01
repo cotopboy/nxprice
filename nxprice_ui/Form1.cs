@@ -61,8 +61,12 @@ namespace nxprice_ui
                 File.Copy(e.FullPath, temp);
             }catch{}
 
-            FileDbEngine<ExchangeDataContainer> exContainerEngine = new FileDbEngine<ExchangeDataContainer>(temp);
-            this.container = exContainerEngine.LoadFileDB();
+            try
+            {
+                FileDbEngine<ExchangeDataContainer> exContainerEngine = new FileDbEngine<ExchangeDataContainer>(temp);
+                this.container = exContainerEngine.LoadFileDB();
+            }
+            catch { MessageBox.Show("load failed."); }
 
             this.Invoke((MethodInvoker)(() => 
             {
@@ -103,6 +107,8 @@ namespace nxprice_ui
         private void dataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             int index = e.RowIndex;
+
+            if (index <= 0) return;
 
             DataGridView dg = sender as DataGridView;
 

@@ -118,7 +118,7 @@ namespace nxprice_lib.Robot
             if (first != null)
             {
                 SaveHistory(first);
-                this.speaker.Say(first.BuyIndex.Round(1).ToString() +" %");
+                this.speaker.Say("%" + first.BuyIndex.Round(2).ToString() );
 
                 if (
                     this.zcbFileDb.BuyIndexSendEmailEnabled 

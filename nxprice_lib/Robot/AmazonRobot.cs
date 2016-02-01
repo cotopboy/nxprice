@@ -5,7 +5,6 @@ using System.Text;
 using nxprice_data;
 using System.Net;
 using HtmlAgilityPack;
-using System.Net.Http;
 using System.Threading;
 using Utilities.DataTypes.ExtensionMethods;
 using Utilities.FileFormats.Zip;
