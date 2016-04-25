@@ -10,6 +10,7 @@ namespace nxprice_data
         None, 
         ZhaoCaiBao,
         Amazon,
+        AddidasNMDRobot,
         Ebay
     }
 }

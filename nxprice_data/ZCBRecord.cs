@@ -59,7 +59,7 @@ namespace nxprice_data
 
             decimal ret = InputProfil - OutputProfil - platformFee;
 
-            return ret / (DayLeft - 184m) / 10000m * 365m * 100;
+            return ret / Math.Abs(DayLeft - 184m) / 10000m * 365m * 100;
             
         }
     }
