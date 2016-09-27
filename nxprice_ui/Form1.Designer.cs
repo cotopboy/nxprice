@@ -46,19 +46,20 @@
             this.tbProductId = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnOpenByDefaultBrowser = new System.Windows.Forms.Button();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.cbConsole = new System.Windows.Forms.CheckBox();
+            this.btnLoad = new System.Windows.Forms.Button();
             this.cbIgnoreRefresh = new System.Windows.Forms.CheckBox();
             this.BtnRefresh = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.label2 = new System.Windows.Forms.Label();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.label3 = new System.Windows.Forms.Label();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.btnLoad = new System.Windows.Forms.Button();
-            this.btnOpenByDefaultBrowser = new System.Windows.Forms.Button();
-            this.cbConsole = new System.Windows.Forms.CheckBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.buyIndexDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dealCountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.minMountDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -74,9 +75,12 @@
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -87,9 +91,8 @@
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
-            this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.zCBRecordBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // webBrowser1
@@ -126,6 +129,8 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.White;
+            this.panel2.Controls.Add(this.label1);
+            this.panel2.Controls.Add(this.numericUpDown1);
             this.panel2.Controls.Add(this.btnOpenByDefaultBrowser);
             this.panel2.Controls.Add(this.panel3);
             this.panel2.Controls.Add(this.pictureBox1);
@@ -136,6 +141,58 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1441, 132);
             this.panel2.TabIndex = 3;
+            // 
+            // btnOpenByDefaultBrowser
+            // 
+            this.btnOpenByDefaultBrowser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOpenByDefaultBrowser.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOpenByDefaultBrowser.Location = new System.Drawing.Point(516, 10);
+            this.btnOpenByDefaultBrowser.Margin = new System.Windows.Forms.Padding(10);
+            this.btnOpenByDefaultBrowser.Name = "btnOpenByDefaultBrowser";
+            this.btnOpenByDefaultBrowser.Size = new System.Drawing.Size(233, 28);
+            this.btnOpenByDefaultBrowser.TabIndex = 2;
+            this.btnOpenByDefaultBrowser.Text = "默认浏览器打开";
+            this.btnOpenByDefaultBrowser.UseVisualStyleBackColor = true;
+            this.btnOpenByDefaultBrowser.Click += new System.EventHandler(this.btnOpenByDefaultBrowser_Click);
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.cbConsole);
+            this.panel3.Controls.Add(this.btnLoad);
+            this.panel3.Controls.Add(this.cbIgnoreRefresh);
+            this.panel3.Controls.Add(this.BtnRefresh);
+            this.panel3.Location = new System.Drawing.Point(143, 42);
+            this.panel3.Name = "panel3";
+            this.panel3.Padding = new System.Windows.Forms.Padding(10);
+            this.panel3.Size = new System.Drawing.Size(360, 80);
+            this.panel3.TabIndex = 7;
+            // 
+            // cbConsole
+            // 
+            this.cbConsole.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.cbConsole.AutoSize = true;
+            this.cbConsole.Checked = true;
+            this.cbConsole.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbConsole.Location = new System.Drawing.Point(0, 56);
+            this.cbConsole.Name = "cbConsole";
+            this.cbConsole.Size = new System.Drawing.Size(86, 17);
+            this.cbConsole.TabIndex = 6;
+            this.cbConsole.Text = "显示控制台";
+            this.cbConsole.UseVisualStyleBackColor = true;
+            this.cbConsole.CheckedChanged += new System.EventHandler(this.cbConsole_CheckedChanged);
+            // 
+            // btnLoad
+            // 
+            this.btnLoad.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLoad.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLoad.Location = new System.Drawing.Point(0, 10);
+            this.btnLoad.Margin = new System.Windows.Forms.Padding(10);
+            this.btnLoad.Name = "btnLoad";
+            this.btnLoad.Size = new System.Drawing.Size(150, 35);
+            this.btnLoad.TabIndex = 2;
+            this.btnLoad.Text = "加载";
+            this.btnLoad.UseVisualStyleBackColor = true;
+            this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
             // 
             // cbIgnoreRefresh
             // 
@@ -155,11 +212,33 @@
             this.BtnRefresh.Location = new System.Drawing.Point(161, 10);
             this.BtnRefresh.Margin = new System.Windows.Forms.Padding(10);
             this.BtnRefresh.Name = "BtnRefresh";
-            this.BtnRefresh.Size = new System.Drawing.Size(150, 35);
+            this.BtnRefresh.Size = new System.Drawing.Size(199, 35);
             this.BtnRefresh.TabIndex = 2;
             this.BtnRefresh.Text = "刷新";
             this.BtnRefresh.UseVisualStyleBackColor = true;
             this.BtnRefresh.Click += new System.EventHandler(this.BtnRefresh_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pictureBox1.Image = global::nxprice_ui.Properties.Resources.earth_find;
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Padding = new System.Windows.Forms.Padding(10);
+            this.pictureBox1.Size = new System.Drawing.Size(137, 129);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 4;
+            this.pictureBox1.TabStop = false;
+            // 
+            // label4
+            // 
+            this.label4.BackColor = System.Drawing.Color.Gold;
+            this.label4.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(0, 129);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(1441, 3);
+            this.label4.TabIndex = 5;
             // 
             // dataGridView1
             // 
@@ -271,66 +350,6 @@
             this.label3.TabIndex = 6;
             this.label3.Text = "第二候选";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.cbConsole);
-            this.panel3.Controls.Add(this.btnLoad);
-            this.panel3.Controls.Add(this.cbIgnoreRefresh);
-            this.panel3.Controls.Add(this.BtnRefresh);
-            this.panel3.Location = new System.Drawing.Point(143, 42);
-            this.panel3.Name = "panel3";
-            this.panel3.Padding = new System.Windows.Forms.Padding(10);
-            this.panel3.Size = new System.Drawing.Size(360, 80);
-            this.panel3.TabIndex = 7;
-            // 
-            // btnLoad
-            // 
-            this.btnLoad.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLoad.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLoad.Location = new System.Drawing.Point(0, 10);
-            this.btnLoad.Margin = new System.Windows.Forms.Padding(10);
-            this.btnLoad.Name = "btnLoad";
-            this.btnLoad.Size = new System.Drawing.Size(150, 35);
-            this.btnLoad.TabIndex = 2;
-            this.btnLoad.Text = "加载";
-            this.btnLoad.UseVisualStyleBackColor = true;
-            this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
-            // 
-            // btnOpenByDefaultBrowser
-            // 
-            this.btnOpenByDefaultBrowser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOpenByDefaultBrowser.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOpenByDefaultBrowser.Location = new System.Drawing.Point(516, 10);
-            this.btnOpenByDefaultBrowser.Margin = new System.Windows.Forms.Padding(10);
-            this.btnOpenByDefaultBrowser.Name = "btnOpenByDefaultBrowser";
-            this.btnOpenByDefaultBrowser.Size = new System.Drawing.Size(233, 110);
-            this.btnOpenByDefaultBrowser.TabIndex = 2;
-            this.btnOpenByDefaultBrowser.Text = "默认浏览器打开";
-            this.btnOpenByDefaultBrowser.UseVisualStyleBackColor = true;
-            this.btnOpenByDefaultBrowser.Click += new System.EventHandler(this.btnOpenByDefaultBrowser_Click);
-            // 
-            // cbConsole
-            // 
-            this.cbConsole.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.cbConsole.AutoSize = true;
-            this.cbConsole.Location = new System.Drawing.Point(0, 56);
-            this.cbConsole.Name = "cbConsole";
-            this.cbConsole.Size = new System.Drawing.Size(86, 17);
-            this.cbConsole.TabIndex = 6;
-            this.cbConsole.Text = "显示控制台";
-            this.cbConsole.UseVisualStyleBackColor = true;
-            this.cbConsole.CheckedChanged += new System.EventHandler(this.cbConsole_CheckedChanged);
-            // 
-            // label4
-            // 
-            this.label4.BackColor = System.Drawing.Color.Gold;
-            this.label4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(0, 129);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(1441, 3);
-            this.label4.TabIndex = 5;
             // 
             // buyIndexDataGridViewTextBoxColumn
             // 
@@ -480,17 +499,32 @@
             this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
             this.dataGridViewTextBoxColumn7.ReadOnly = true;
             // 
-            // pictureBox1
+            // numericUpDown1
             // 
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pictureBox1.Image = global::nxprice_ui.Properties.Resources.earth_find;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Padding = new System.Windows.Forms.Padding(10);
-            this.pictureBox1.Size = new System.Drawing.Size(137, 129);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 4;
-            this.pictureBox1.TabStop = false;
+            this.numericUpDown1.DecimalPlaces = 2;
+            this.numericUpDown1.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.numericUpDown1.Location = new System.Drawing.Point(596, 51);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(151, 20);
+            this.numericUpDown1.TabIndex = 8;
+            this.numericUpDown1.Value = new decimal(new int[] {
+            279,
+            0,
+            0,
+            131072});
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(521, 56);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(55, 13);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "半年利率";
             // 
             // Form1
             // 
@@ -505,6 +539,9 @@
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
@@ -515,10 +552,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.zCBRecordBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -558,6 +593,8 @@
         private System.Windows.Forms.Button btnOpenByDefaultBrowser;
         private System.Windows.Forms.CheckBox cbConsole;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
     }
 }
 

@@ -9,6 +9,11 @@ using Microsoft.Practices.Unity;
 
 namespace nxprice_lib
 {
+    public class StartParameter
+    { 
+    
+    }
+
     public class NxPriceMgr
     {
         private FileDbEngine<FileDb> dbEngine;
@@ -52,6 +57,11 @@ namespace nxprice_lib
             this.timer = new Timer(this.db.TimerInterval);
             this.timer.Elapsed += new ElapsedEventHandler(TimerElapsedHandler);
             this.isInitialize = true;
+
+            if(db.WebProxy.IsEnablded)
+                Console.WriteLine("Web Proxy :" + db.WebProxy.ProxyServer);
+
+
         }
 
         private void TimerElapsedHandler(object sender, ElapsedEventArgs e)

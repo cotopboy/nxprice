@@ -9,6 +9,10 @@ namespace nxprice_data
     [Serializable]
     public class ZCBRecord
     {
+        public static decimal HalfYearRate = 2.7m;
+        public static int HalfYearDays = 184;
+
+
         public int PageIndex { get; set; }
 
         public double YearRate { get; set; }
@@ -24,6 +28,8 @@ namespace nxprice_data
         public double BuyIndex  { get; set; }
 
         public int ItemIndex { get; set; }
+
+        public decimal RawProfit { get;set; }
 
         public ZCBRecord()
         {
@@ -44,23 +50,35 @@ namespace nxprice_data
 
             this.PageIndex = pageIndex;
 
-            this.BuyIndex = (double)(this.GetBuyIndex((decimal)YearRate, (decimal)DayLeft));
+            decimal temp;
+
+            this.BuyIndex = (double)(this.GetBuyIndex((decimal)YearRate, (decimal)DayLeft, (decimal)this.MinMount * 100, out temp));
+
+            this.RawProfit = temp;
 
             this.ItemIndex = itemIndex;
         }
 
-        private decimal GetBuyIndex(decimal YearRate, decimal DayLeft,decimal momey = 10000)
+        private decimal GetBuyIndex(decimal YearRate, decimal DayLeft, decimal momey,  out decimal profil)
         {
+
             decimal InputProfil = YearRate / 100m * (DayLeft) / 365m * momey;
-            decimal OutputProfil = 3.5m / 100m * 185 / 365m * momey;
+
+            decimal OutputProfil = HalfYearRate / 100m * HalfYearDays / 365m * momey;
 
             decimal platformFee = momey * 0.2m / 100m;
 
 
             decimal ret = InputProfil - OutputProfil - platformFee;
+            profil = ret;
 
-            return ret / Math.Abs(DayLeft - 184m) / 10000m * 365m * 100;
-            
+            decimal leftDay = DayLeft - HalfYearDays;
+
+            if (leftDay <= 1) return 0;
+            else
+            {
+                return ret / leftDay / momey * 365m * 100;
+            }
         }
     }
 }

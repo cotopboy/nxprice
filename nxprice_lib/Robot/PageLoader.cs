@@ -25,7 +25,7 @@ namespace nxprice_lib.Robot
                     if (isUseProxy)
                     {
                         WebProxy myProxy = new WebProxy();
-                        Uri newUri = new Uri(string.Format("http://node-{0}.vnet.link:210",proxyServer));
+                        Uri newUri = new Uri(string.Format("http://node-{0}.vnet.one:320", proxyServer));
                         myProxy.Address = newUri;
                         myProxy.Credentials = new NetworkCredential(proxyUserName, proxyPassowrd);
                         MyWebClient.Proxy = myProxy;

@@ -22,6 +22,8 @@ namespace nxprice_lib.Robot
     {
         private static volatile bool isBusy = false;
 
+        private static string LastSentMsg = "";
+
         private static List<ZCBRecord> RecordList = new List<ZCBRecord>();
 
         private List<ManualResetEvent> EventList = new List<ManualResetEvent>();
@@ -98,8 +100,13 @@ namespace nxprice_lib.Robot
             foreach (var item in HittedRecord)
             {
 
-                Console.WriteLine("Page={0:D2}     Rate={1}        DayLeft={2}     MinMount={3}        BuyIndex={4:F2}",
-                                  item.PageIndex, item.YearRate, item.DayLeft, item.MinMount, item.BuyIndex);
+                Console.WriteLine("Page={0:D2}     Rate={1}     R:{5:F2}   DayLeft={2}     MinMount={3}        BuyIndex={4:F2}",
+                                  item.PageIndex,
+                                  item.YearRate, 
+                                  item.DayLeft,
+                                  item.MinMount,
+                                  item.BuyIndex,
+                                  item.RawProfit);
       
             }
 
@@ -125,12 +132,20 @@ namespace nxprice_lib.Robot
                     && first.BuyIndex > this.zcbFileDb.BuyIndexSendEmailLimit
                     )
                 {
-                    SendMessage("{0}页{1}项-{2}天-{3}%--系数{4:F2}".FormatAs(        
+
+                    string msg = "{0}页{1}项-{2}天-{3}%--统合利率{4:F2}".FormatAs(
                             first.PageIndex,
                             first.ItemIndex,
                             first.DayLeft,
                             first.YearRate,
-                            first.BuyIndex));
+                            first.BuyIndex);
+
+                    if (LastSentMsg != msg)
+                    {
+                        SendMessage(msg);
+
+                        LastSentMsg = msg;
+                    }
                 }
             }
 

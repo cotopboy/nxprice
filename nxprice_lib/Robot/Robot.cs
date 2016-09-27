@@ -26,16 +26,7 @@ namespace nxprice_lib.Robot
 
             MyWebClient.Credentials = CredentialCache.DefaultCredentials;
             
-            var webProxyConfig = db.WebProxy;
-            if (db.WebProxy.IsEnablded && isUseProxy)
-            {
-                WebProxy myProxy = new WebProxy();
-                Uri newUri = new Uri("http://node-fr.vnet.link:210");
-                myProxy.Address = newUri;
-                myProxy.Credentials = new NetworkCredential(webProxyConfig.UserName, webProxyConfig.Password);
-                MyWebClient.Proxy = myProxy;
-
-            }
+         
 
             Byte[] pageData = MyWebClient.DownloadData(url);
 
@@ -68,17 +59,17 @@ namespace nxprice_lib.Robot
 
             msg.To.Add("nxdaigou@gmail.com");
 
-            msg.From = new MailAddress("cotopboy@gmail.com", "招财宝", System.Text.Encoding.UTF8);
+            msg.From = new MailAddress("cotopboy@googlemail.com", Msg);
 
             msg.Subject = Msg;
             msg.SubjectEncoding = System.Text.Encoding.UTF8;
-            msg.Body ="";
+            msg.Body = "ZhaoCaiBao";
 
 
             var client = new SmtpClient(this.db.EmailConfig.GmailSmtp, this.db.EmailConfig.GmailPort)
             {
                 Credentials = new NetworkCredential(this.db.EmailConfig.GmailAccount, this.db.EmailConfig.GmailPassword),
-                EnableSsl = true
+                EnableSsl = true,
             };
 
             client.Send(msg);

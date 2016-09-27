@@ -61,6 +61,7 @@ namespace nxprice_lib.Robot.ZhaoCaiBao
             }
 
             string pageUrl = this.jobInfo.Url.Replace("#pageNum#", pageIndex.ToString());
+            Console.WriteLine(pageUrl);
             string pageHtml = this.pageLoader.GetPageHtml(pageUrl, false,
                                                           this.db.WebProxy.ProxyServer,
                                                           this.db.WebProxy.UserName,

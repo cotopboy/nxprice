@@ -93,6 +93,8 @@ namespace nxprice_ui
 
         private void BtnRefresh_Click(object sender, EventArgs e)
         {
+            ZCBRecord.HalfYearRate = this.numericUpDown1.Value;
+
             new Action(() =>
             {
                 UnityContainer nx = new UnityContainer();
