@@ -21,6 +21,7 @@ namespace nxprice_lib.Robot
     public class ZhaoCaiBaoRobot :Robot,IRobot
     {
         private static volatile bool isBusy = false;
+        private static double LastBuyIndex = 0.0;
 
         private static string LastSentMsg = "";
 
@@ -133,18 +134,18 @@ namespace nxprice_lib.Robot
                     )
                 {
 
-                    string msg = "{0}页{1}项-{2}天-{3}%--统合利率{4:F2}".FormatAs(
+                    string msg = "{0}.{1} {2}天-{3}% {4:F2}%".FormatAs(
                             first.PageIndex,
                             first.ItemIndex,
                             first.DayLeft,
                             first.YearRate,
                             first.BuyIndex);
 
-                    if (LastSentMsg != msg)
+                    if (Math.Abs(LastBuyIndex -  first.BuyIndex) >= 0.1)
                     {
                         SendMessage(msg);
 
-                        LastSentMsg = msg;
+                        LastBuyIndex = first.BuyIndex;
                     }
                 }
             }

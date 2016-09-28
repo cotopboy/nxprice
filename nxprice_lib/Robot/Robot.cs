@@ -61,7 +61,7 @@ namespace nxprice_lib.Robot
 
             msg.From = new MailAddress("cotopboy@googlemail.com", Msg);
 
-            msg.Subject = Msg;
+            msg.Subject = ".";
             msg.SubjectEncoding = System.Text.Encoding.UTF8;
             msg.Body = "ZhaoCaiBao";
 
