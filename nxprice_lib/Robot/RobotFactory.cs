@@ -12,8 +12,6 @@ namespace nxprice_lib.Robot
 
         public IRobot CreateRobot(WebSite webSite, UnityContainer container)
         {
-            if (webSite == WebSite.Amazon) return container.Resolve<AmazonRobot>();
-
             if (webSite == WebSite.ZhaoCaiBao) return container.Resolve<ZhaoCaiBaoRobot>();
 
             return null;

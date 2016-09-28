@@ -21,9 +21,10 @@ namespace nxprice_lib.Robot
     public class ZhaoCaiBaoRobot :Robot,IRobot
     {
         private static volatile bool isBusy = false;
-        private static double LastBuyIndex = 0.0;
-
-        private static string LastSentMsg = "";
+        
+        private static double LastBuyIndex1 = 0.0;
+        private static double LastBuyIndex2 = 0.0;
+        
 
         private static List<ZCBRecord> RecordList = new List<ZCBRecord>();
 
@@ -122,30 +123,24 @@ namespace nxprice_lib.Robot
             Console.ResetColor();
 
             var first = HittedRecord.FirstOrDefault();
+            var secondHitFirst = SecondHittedRecord.FirstOrDefault();
 
             if (first != null)
             {
                 SaveHistory(first);
                 this.speaker.Say("%" + first.BuyIndex.Round(2).ToString() );
 
-                if (
-                    this.zcbFileDb.BuyIndexSendEmailEnabled 
-                    && first.BuyIndex > this.zcbFileDb.BuyIndexSendEmailLimit
-                    )
+                if (this.zcbFileDb.BuyIndexSendEmailEnabled)
                 {
-
-                    string msg = "{0}.{1} {2}天-{3}% {4:F2}%".FormatAs(
-                            first.PageIndex,
-                            first.ItemIndex,
-                            first.DayLeft,
-                            first.YearRate,
-                            first.BuyIndex);
-
-                    if (Math.Abs(LastBuyIndex -  first.BuyIndex) >= 0.1)
+                    if (Math.Abs(LastBuyIndex1 -  first.BuyIndex) >= 0.1 
+                        ||
+                        Math.Abs(LastBuyIndex2 - secondHitFirst.BuyIndex) >= 0.1 
+                        )
                     {
-                        SendMessage(msg);
+                        SendZhaoCaiBaoMessage(first, secondHitFirst);
 
-                        LastBuyIndex = first.BuyIndex;
+                        LastBuyIndex1 = first.BuyIndex;
+                        LastBuyIndex2 = secondHitFirst.BuyIndex;
                     }
                 }
             }
@@ -159,6 +154,16 @@ namespace nxprice_lib.Robot
 
             
         }
+
+        private void SendZhaoCaiBaoMessage(ZCBRecord first, ZCBRecord second)
+        {
+            var email = new ZhaoCaiBaoEmailReportBuilder().Build(first, second);
+
+            SendMessage(email.Sender, email.Subject, email.Body);
+
+        }
+
+       
 
         private void ExportListToBuyUi(ExchangeDataContainer exContaienr)
         {

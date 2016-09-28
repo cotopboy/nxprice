@@ -53,17 +53,17 @@ namespace nxprice_lib.Robot
             return toString;
         }
 
-        protected void SendMessage(string Msg)
+        protected void SendMessage(string senderName,string Subject, string body)
         {
             System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();
 
             msg.To.Add("nxdaigou@gmail.com");
 
-            msg.From = new MailAddress("cotopboy@googlemail.com", Msg);
+            msg.From = new MailAddress("cotopboy@googlemail.com", senderName);
 
-            msg.Subject = ".";
+            msg.Subject = Subject;
             msg.SubjectEncoding = System.Text.Encoding.UTF8;
-            msg.Body = "ZhaoCaiBao";
+            msg.Body = "ZhaoCaiBao" + Environment.NewLine +  body;
 
 
             var client = new SmtpClient(this.db.EmailConfig.GmailSmtp, this.db.EmailConfig.GmailPort)
@@ -75,26 +75,7 @@ namespace nxprice_lib.Robot
             client.Send(msg);
         }
 
-        protected void SendMessage(TargetRecord jobInfo)
-        {
-            System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();
+        
 
-            msg.To.Add("2777888@qq.com");
-
-            msg.From = new MailAddress("nxdaigou@gmail.com", "Nx-Daigou Luebeck", System.Text.Encoding.UTF8);
-
-            msg.Subject = jobInfo.Name + "==" + jobInfo.LastStatus;
-            msg.SubjectEncoding = System.Text.Encoding.UTF8;
-            msg.Body = msg.Subject;
-
-
-            var client = new SmtpClient(this.db.EmailConfig.GmailSmtp, this.db.EmailConfig.GmailPort)
-            {
-                Credentials = new NetworkCredential(this.db.EmailConfig.GmailAccount, this.db.EmailConfig.GmailPassword),
-                EnableSsl = true
-            };
-
-            client.Send(msg);
-        }
     }
 }
