@@ -11,6 +11,8 @@ namespace nxprice_data
         ZhaoCaiBao,
         Amazon,
         AddidasNMDRobot,
-        Ebay
+        Ebay,
+        DM,
+        RM
     }
 }

@@ -6,6 +6,9 @@ using nxprice_data;
 using System.Timers;
 using nxprice_lib.Robot;
 using Microsoft.Practices.Unity;
+using System.Diagnostics;
+using Utilities.IO;
+
 
 namespace nxprice_lib
 {
@@ -19,6 +22,7 @@ namespace nxprice_lib
         private FileDbEngine<FileDb> dbEngine;
         private FileDb db;
         private Timer timer;
+        private Timer restartTimer;
         private RobotFactory factory;
         private bool isBusy = false;
         private bool isInitialize = false;
@@ -58,10 +62,23 @@ namespace nxprice_lib
             this.timer.Elapsed += new ElapsedEventHandler(TimerElapsedHandler);
             this.isInitialize = true;
 
+            this.restartTimer = new Timer(1000 * 3600 * 24);
+            restartTimer.Elapsed += new ElapsedEventHandler(restartTimer_Elapsed);
+            restartTimer.Start();
+
             if(db.WebProxy.IsEnablded)
                 Console.WriteLine("Web Proxy :" + db.WebProxy.ProxyServer);
 
 
+        }
+
+        private void restartTimer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            Process.Start(DirectoryHelper.CurrentProcessFullName);
+
+            System.Threading.Thread.Sleep(10000);
+
+            Environment.Exit(0);
         }
 
         private void TimerElapsedHandler(object sender, ElapsedEventArgs e)
@@ -74,14 +91,28 @@ namespace nxprice_lib
             {
                 if (targetRecord.IsEnabled)
                 {
-                    IRobot robot = this.factory.CreateRobot(targetRecord.WebSite, this.container);
-
-                    robot.DoJob(targetRecord);
+                    try
+                    {
+                        IRobot robot = this.factory.CreateRobot(targetRecord.WebSite, this.container);
+                        robot.DoJob(targetRecord);
+                    }
+                    catch 
+                    {
+                        Console.WriteLine("Error");
+                    }
+                        
                 }
             }
 
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("=====================================");
+            Console.WriteLine("=====================================");
+            Console.WriteLine();
+            Console.ResetColor();
 
-            dbEngine.Save();
+
+            dbEngine.Save(false);
 
             this.isBusy = false;
         }

@@ -1,0 +1,208 @@
+<?xml version="1.0"?>
+<FileDb xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <TimerInterval>50000</TimerInterval>
+  <EmailConfig>
+    <GmailSmtp>smtp.gmail.com</GmailSmtp>
+    <GmailPort>587</GmailPort>
+    <GmailAccount>nxdaigou@googlemail.com</GmailAccount>
+    <GmailPassword>980203root</GmailPassword>
+  </EmailConfig>
+  <WebProxy>
+    <IsEnablded>false</IsEnablded>
+    <ProxyServer>fr</ProxyServer>
+    <UserName>cotopboy</UserName>
+    <Password>cotopboy</Password>
+  </WebProxy>
+  <TargetRecords>
+    <TargetRecord>
+      <IsEnabled>false</IsEnabled>
+      <Name>ZhaoCaiBao</Name>
+      <Url>https://zhaocaibao.alipay.com/pf/productQuery.htm?pageNum=#pageNum#&amp;minMonth=6&amp;maxMonth=8&amp;minAmount=&amp;danbao=1</Url>
+      <WebSite>ZhaoCaiBao</WebSite>
+      <PullingIntervalSec>5000</PullingIntervalSec>
+      <LastChangedTime>2016-01-01T00:00:00</LastChangedTime>
+      <LastStatus>NA</LastStatus>
+      <HistoryItems />
+    </TargetRecord>
+    <TargetRecord>
+      <IsEnabled>true</IsEnabled>
+      <Name>dm_ATBJ_2</Name>
+      <Url>https://www.dm.de/aptamil-profutura-folgemilch-2-nach-dem-6-monat-p4008976022916.html</Url>
+      <WebSite>DM</WebSite>
+      <PullingIntervalSec>5000</PullingIntervalSec>
+      <LastChangedTime>2016-01-01T00:00:00</LastChangedTime>
+      <LastStatus>N/A</LastStatus>
+      <HistoryItems />
+    </TargetRecord>
+    <TargetRecord>
+      <IsEnabled>true</IsEnabled>
+      <Name>dm_ATBJ_1</Name>
+      <Url>https://www.dm.de/aptamil-profutura-anfangsmilch-1-p4008976022909.html</Url>
+      <WebSite>DM</WebSite>
+      <PullingIntervalSec>5000</PullingIntervalSec>
+      <LastChangedTime>2016-01-01T00:00:00</LastChangedTime>
+      <LastStatus>N/A</LastStatus>
+      <HistoryItems />
+    </TargetRecord>
+    <TargetRecord>
+      <IsEnabled>true</IsEnabled>
+      <Name>dm_ATBJ_p</Name>
+      <Url>https://www.dm.de/aptamil-profutura-anfangsmilch-pre-von-geburt-an-p4008976022923.html</Url>
+      <WebSite>DM</WebSite>
+      <PullingIntervalSec>5000</PullingIntervalSec>
+      <LastChangedTime>2016-01-01T00:00:00</LastChangedTime>
+      <LastStatus>N/A</LastStatus>
+      <HistoryItems />
+    </TargetRecord>
+    <TargetRecord>
+      <IsEnabled>true</IsEnabled>
+      <Name>dm_atm_p</Name>
+      <Url>https://www.dm.de/aptamil-pronutra-anfangsmilch-pre-von-geburt-an-p4008976022350.html</Url>
+      <WebSite>DM</WebSite>
+      <PullingIntervalSec>5000</PullingIntervalSec>
+      <LastChangedTime>2016-01-01T00:00:00</LastChangedTime>
+      <LastStatus>Sofort lieferbar</LastStatus>
+      <HistoryItems />
+    </TargetRecord>
+    <TargetRecord>
+      <IsEnabled>true</IsEnabled>
+      <Name>dm_atm_1</Name>
+      <Url>https://www.dm.de/aptamil-pronutra-anfangsmilch-1-von-geburt-an-p4008976022329.html</Url>
+      <WebSite>DM</WebSite>
+      <PullingIntervalSec>5000</PullingIntervalSec>
+      <LastChangedTime>2016-01-01T00:00:00</LastChangedTime>
+      <LastStatus>N/A</LastStatus>
+      <HistoryItems />
+    </TargetRecord>
+    <TargetRecord>
+      <IsEnabled>true</IsEnabled>
+      <Name>dm_atm_2</Name>
+      <Url>https://www.dm.de/aptamil-pronutra-folgemilch-2-nach-dem-6-monat-p4008976022336.html</Url>
+      <WebSite>DM</WebSite>
+      <PullingIntervalSec>5000</PullingIntervalSec>
+      <LastChangedTime>2016-01-01T00:00:00</LastChangedTime>
+      <LastStatus>Sofort lieferbar</LastStatus>
+      <HistoryItems />
+    </TargetRecord>
+    <TargetRecord>
+      <IsEnabled>true</IsEnabled>
+      <Name>dm_atm_3</Name>
+      <Url>https://www.dm.de/aptamil-pronutra-folgemilch-3-ab-dem-10-monat-p4008976022343.html</Url>
+      <WebSite>DM</WebSite>
+      <PullingIntervalSec>5000</PullingIntervalSec>
+      <LastChangedTime>2016-01-01T00:00:00</LastChangedTime>
+      <LastStatus>N/A</LastStatus>
+      <HistoryItems />
+    </TargetRecord>
+    <TargetRecord>
+      <IsEnabled>true</IsEnabled>
+      <Name>dm_atm_1+</Name>
+      <Url>https://www.dm.de/aptamil-kindermilch-ab-1-jahr-p4008976022305.html</Url>
+      <WebSite>DM</WebSite>
+      <PullingIntervalSec>5000</PullingIntervalSec>
+      <LastChangedTime>2016-01-01T00:00:00</LastChangedTime>
+      <LastStatus>Sofort lieferbar</LastStatus>
+      <HistoryItems />
+    </TargetRecord>
+    <TargetRecord>
+      <IsEnabled>true</IsEnabled>
+      <Name>dm_atm_2+</Name>
+      <Url>https://www.dm.de/aptamil-kindermilch-ab-2-jahren-p4008976022312.html</Url>
+      <WebSite>DM</WebSite>
+      <PullingIntervalSec>5000</PullingIntervalSec>
+      <LastChangedTime>2016-01-01T00:00:00</LastChangedTime>
+      <LastStatus>N/A</LastStatus>
+      <HistoryItems />
+    </TargetRecord>
+    <TargetRecord>
+      <IsEnabled>true</IsEnabled>
+      <Name>rm_ATBJ_p</Name>
+      <Url>https://www.rossmann.de/produkte/aptamil/profutura-anfangsmilch-pre/4008976022923.html</Url>
+      <WebSite>RM</WebSite>
+      <PullingIntervalSec>5000</PullingIntervalSec>
+      <LastChangedTime>2016-01-01T00:00:00</LastChangedTime>
+      <LastStatus>N/A</LastStatus>
+      <HistoryItems />
+    </TargetRecord>
+    <TargetRecord>
+      <IsEnabled>true</IsEnabled>
+      <Name>rm_ATBJ_1</Name>
+      <Url>https://www.rossmann.de/produkte/aptamil/profutura-anfangsmilch-1/4008976022909.html</Url>
+      <WebSite>RM</WebSite>
+      <PullingIntervalSec>5000</PullingIntervalSec>
+      <LastChangedTime>2016-01-01T00:00:00</LastChangedTime>
+      <LastStatus>N/A</LastStatus>
+      <HistoryItems />
+    </TargetRecord>
+    <TargetRecord>
+      <IsEnabled>true</IsEnabled>
+      <Name>rm_ATBJ_2</Name>
+      <Url>https://www.rossmann.de/produkte/aptamil/profutura-folgemilch-2/4008976022916.html</Url>
+      <WebSite>RM</WebSite>
+      <PullingIntervalSec>5000</PullingIntervalSec>
+      <LastChangedTime>2016-01-01T00:00:00</LastChangedTime>
+      <LastStatus>N/A</LastStatus>
+      <HistoryItems />
+    </TargetRecord>
+    <TargetRecord>
+      <IsEnabled>true</IsEnabled>
+      <Name>rm_atm_p</Name>
+      <Url>https://www.rossmann.de/produkte/aptamil/pronutra-pre-anfangsmilch/4008976022350.html</Url>
+      <WebSite>RM</WebSite>
+      <PullingIntervalSec>5000</PullingIntervalSec>
+      <LastChangedTime>2016-01-01T00:00:00</LastChangedTime>
+      <LastStatus>A</LastStatus>
+      <HistoryItems />
+    </TargetRecord>
+    <TargetRecord>
+      <IsEnabled>true</IsEnabled>
+      <Name>rm_atm_1</Name>
+      <Url>https://www.rossmann.de/produkte/aptamil/pronutra-anfangsmilch-1/4008976022329.html</Url>
+      <WebSite>RM</WebSite>
+      <PullingIntervalSec>5000</PullingIntervalSec>
+      <LastChangedTime>2016-01-01T00:00:00</LastChangedTime>
+      <LastStatus>A</LastStatus>
+      <HistoryItems />
+    </TargetRecord>
+    <TargetRecord>
+      <IsEnabled>true</IsEnabled>
+      <Name>rm_atm_2</Name>
+      <Url>https://www.rossmann.de/produkte/aptamil/pronutra-folgemilch-2/4008976022336.html</Url>
+      <WebSite>RM</WebSite>
+      <PullingIntervalSec>5000</PullingIntervalSec>
+      <LastChangedTime>2016-01-01T00:00:00</LastChangedTime>
+      <LastStatus>N/A</LastStatus>
+      <HistoryItems />
+    </TargetRecord>
+    <TargetRecord>
+      <IsEnabled>true</IsEnabled>
+      <Name>rm_atm_3</Name>
+      <Url>https://www.rossmann.de/produkte/aptamil/pronutra-folgemilch-3/4008976022343.html</Url>
+      <WebSite>RM</WebSite>
+      <PullingIntervalSec>5000</PullingIntervalSec>
+      <LastChangedTime>2016-01-01T00:00:00</LastChangedTime>
+      <LastStatus>N/A</LastStatus>
+      <HistoryItems />
+    </TargetRecord>
+    <TargetRecord>
+      <IsEnabled>true</IsEnabled>
+      <Name>rm_atm_1+</Name>
+      <Url>https://www.rossmann.de/produkte/aptamil/pronutra-kindermilch-1/4008976022985.html</Url>
+      <WebSite>RM</WebSite>
+      <PullingIntervalSec>5000</PullingIntervalSec>
+      <LastChangedTime>2016-01-01T00:00:00</LastChangedTime>
+      <LastStatus>A</LastStatus>
+      <HistoryItems />
+    </TargetRecord>
+    <TargetRecord>
+      <IsEnabled>true</IsEnabled>
+      <Name>rm_atm_2+</Name>
+      <Url>https://www.rossmann.de/produkte/aptamil/pronutra-kindermilch-2/4008976022992.html</Url>
+      <WebSite>RM</WebSite>
+      <PullingIntervalSec>5000</PullingIntervalSec>
+      <LastChangedTime>2016-01-01T00:00:00</LastChangedTime>
+      <LastStatus>N/A</LastStatus>
+      <HistoryItems />
+    </TargetRecord>
+  </TargetRecords>
+</FileDb>

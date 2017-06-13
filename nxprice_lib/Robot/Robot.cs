@@ -52,18 +52,19 @@ namespace nxprice_lib.Robot
             string toString = toEncoding.GetString(toBytes);
             return toString;
         }
+        
 
         protected void SendMessage(string senderName,string Subject, string body)
         {
             System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();
 
-            msg.To.Add("nxdaigou@gmail.com");
+            msg.To.Add("2777888@qq.com");
 
-            msg.From = new MailAddress("cotopboy@googlemail.com", senderName);
+            msg.From = new MailAddress("nxdaigou@googlemail.com", senderName);
 
             msg.Subject = Subject;
             msg.SubjectEncoding = System.Text.Encoding.UTF8;
-            msg.Body = "ZhaoCaiBao" + Environment.NewLine +  body;
+            msg.Body = body;
 
 
             var client = new SmtpClient(this.db.EmailConfig.GmailSmtp, this.db.EmailConfig.GmailPort)
