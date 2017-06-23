@@ -55,17 +55,21 @@ namespace nxprice_lib.Robot
         
 
         protected void SendMessage(string senderName,string Subject, string body)
+        {            
+            SendMessage("2777888@qq.com", senderName, Subject, body);
+        }
+
+        protected void SendMessage(string recipientEmail, string senderName, string Subject, string body)
         {
             System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();
 
-            msg.To.Add("2777888@qq.com");
+            msg.To.Add(recipientEmail);
 
             msg.From = new MailAddress("nxdaigou@googlemail.com", senderName);
 
             msg.Subject = Subject;
             msg.SubjectEncoding = System.Text.Encoding.UTF8;
             msg.Body = body;
-
 
             var client = new SmtpClient(this.db.EmailConfig.GmailSmtp, this.db.EmailConfig.GmailPort)
             {

@@ -51,6 +51,9 @@
     <Compile Include="NxPriceMain.cs" />
     <Compile Include="NxPriceMgr.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Robot\DBStation\Ps\DbStationPsRobot.cs" />
+    <Compile Include="Robot\DBStation\Ps\PsInfoExtractor.cs" />
+    <Compile Include="Robot\DBStation\Ps\PsRecord.cs" />
     <Compile Include="Robot\DM\DmRobot.cs" />
     <Compile Include="Robot\IRobot.cs" />
     <Compile Include="Robot\PageLoader.cs" />
@@ -64,6 +67,9 @@
     <Compile Include="Robot\ZhaoCaiBao\PageProcessorFactory.cs" />
     <Compile Include="Robot\ZhaoCaiBao\ZcbFileDb.cs" />
     <Compile Include="Robot\ZhaoCaiBao\ZhaoCaiBaoEmailReportBuilder.cs" />
+    <Compile Include="Web\CookieAwareWebClient.cs">
+      <SubType>Component</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\nxprice_data\nxprice_data.csproj">

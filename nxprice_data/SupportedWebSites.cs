@@ -13,6 +13,7 @@ namespace nxprice_data
         AddidasNMDRobot,
         Ebay,
         DM,
-        RM
+        RM,
+        DbStationPs
     }
 }

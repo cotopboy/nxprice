@@ -96,8 +96,9 @@ namespace nxprice_lib
                         IRobot robot = this.factory.CreateRobot(targetRecord.WebSite, this.container);
                         robot.DoJob(targetRecord);
                     }
-                    catch 
+                    catch (Exception exp)
                     {
+                        Console.WriteLine(exp.ToString());
                         Console.WriteLine("Error");
                     }
                         
