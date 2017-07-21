@@ -97,32 +97,31 @@ namespace nxprice_lib.Robot.DBStation.Ps
             if (item.Email.IsNullOrEmpty()) return;
 
             var header = "[" + item.RecipientName + "]" + "国际订单号已生成";
-            var body = "国际运单号 EMS转单号: " + item.EMSTracingNo;
-
-            body += "通过百度查询: " + "http://www.baidu.com/s?wd=" + item.EMSTracingNo + Environment.NewLine;
-            body += "通过中国EMS网站进行更进一步的查询： http://www.ems.com.cn " + Environment.NewLine;
-            body += "通过EMS全国统一服务电话人工查询及问题反馈: 11183 " + Environment.NewLine;
+            var body = "国际运单号 EMS转单号: " + item.EMSTracingNo + Environment.NewLine + Environment.NewLine;
+            body += "通过百度查询: " + "http://www.baidu.com/s?wd=" + item.EMSTracingNo.Trim() + Environment.NewLine + Environment.NewLine;
+            body += "通过中国EMS网站进行更进一步的查询： http://www.ems.com.cn " + Environment.NewLine + Environment.NewLine;
+            body += "通过EMS全国统一服务电话人工查询及问题反馈: 11183 " + Environment.NewLine + Environment.NewLine;
             body += "谢谢 :)";
 
 
-            SendMessage("2777888@qq.com", "NxDaigou 张锐锋", header, body);
+            SendMessage(item.Email, "NxDaigou 张锐锋", header, body);
         }
 
         private void SendWaitingDanghaoEmail(PsRecord item)
         {
             if (item.Email.IsNullOrEmpty()) return;
 
-            var header = "[" + item.RecipientName + "]" + " 包裹将很快被寄出";
+            var header = "[" + item.RecipientName + "]" + " 包裹德国境内单号已生成";
             var body = "";
-            body += "运单编号: " + item.OrderId + Environment.NewLine;
-            body += "收件人地址: " + item.CnAddress + Environment.NewLine;
+            body += "运单编号: " + item.OrderId + Environment.NewLine + Environment.NewLine;
+            body += "收件人地址: " + item.CnAddress + Environment.NewLine + Environment.NewLine;
 
-            body += "德国境内物流查询: " + "http://nolp.dhl.de/nextt-online-public/set_identcodes.do?lang=en&idc=" + item.DHLTracingNo + Environment.NewLine;
-            body += "等包裹到物流仓库,并且报关之后,才会生成国际运单号" + Environment.NewLine;
-            body += "到时候我再发邮件通知你 \n";
+            body += "德国境内物流查询: " + "http://nolp.dhl.de/nextt-online-public/set_identcodes.do?lang=en&idc=" + item.DHLTracingNo + Environment.NewLine + Environment.NewLine;
+            body += "等包裹到物流仓库,并且报关之后,才会生成国际运单号" + Environment.NewLine + Environment.NewLine;
+            body += "到时候我再发邮件通知你 \n" + Environment.NewLine;
             body += "谢谢 :)";
 
-            SendMessage("2777888@qq.com", "NxDaigou 张锐锋", header, body);
+            SendMessage(item.Email, "NxDaigou 张锐锋", header, body);
         }
 
     
