@@ -97,10 +97,10 @@ namespace nxprice_lib.Robot.DBStation.Ps
             if (item.Email.IsNullOrEmpty()) return;
 
             var header = "[" + item.RecipientName + "]" + "国际订单号已生成";
-            var body = "国际运单号 EMS转单号: " + item.EMSTracingNo + Environment.NewLine + Environment.NewLine;
+            var body = "国际运单号 转国内圆通运单号: " + item.EMSTracingNo + Environment.NewLine + Environment.NewLine;
             body += "通过百度查询: " + "http://www.baidu.com/s?wd=" + item.EMSTracingNo.Trim() + Environment.NewLine + Environment.NewLine;
-            body += "通过中国EMS网站进行更进一步的查询： http://www.ems.com.cn " + Environment.NewLine + Environment.NewLine;
-            body += "通过EMS全国统一服务电话人工查询及问题反馈: 11183 " + Environment.NewLine + Environment.NewLine;
+            body += "通过圆通网站进行更进一步的查询：http://www.yto.net.cn/gw/service/Shipmenttracking.html " + Environment.NewLine + Environment.NewLine;
+            body += "通过圆通电话人工查询及问题反馈: 95554 " + Environment.NewLine + Environment.NewLine;
             body += "谢谢 :)";
 
 
