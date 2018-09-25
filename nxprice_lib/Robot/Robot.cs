@@ -22,17 +22,19 @@ namespace nxprice_lib.Robot
 
         protected string GetPageHtml(string url,bool isUseProxy, Encoding encoding = null)
         {
+            ServicePointManager.Expect100Continue = true;
+            ServicePointManager.SecurityProtocol = (SecurityProtocolType)3072;
+            ServicePointManager.DefaultConnectionLimit = 9999;
+
             WebClient MyWebClient = new WebClient();
 
             MyWebClient.Credentials = CredentialCache.DefaultCredentials;
-            
-         
 
             Byte[] pageData = MyWebClient.DownloadData(url);
 
 
             if (encoding == null) encoding = Encoding.UTF8;
-            //string pageHtml = Encoding.Default.GetString(pageData);  //如果获取网站页面采用的是GB2312，则使用这句            
+              
             string pageHtml = encoding.GetString(pageData);   //如果获取网站页面采用的是UTF-8，则使用这句
             return pageHtml;
         }

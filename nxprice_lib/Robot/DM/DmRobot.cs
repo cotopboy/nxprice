@@ -27,7 +27,7 @@ namespace nxprice_lib.Robot.DM
         {
             string content = this.GetPageHtml(jobInfo.Url,false);
 
-            if (content.Contains("Sofort lieferbar"))
+            if (!content.Contains("Derzeit online nicht lieferbar"))
             {
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine(DateTime.Now.ToString("s") + " " + jobInfo.Name.PadRight(10) + "==> OK");

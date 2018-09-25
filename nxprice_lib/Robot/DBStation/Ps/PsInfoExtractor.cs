@@ -43,12 +43,12 @@ namespace nxprice_lib.Robot.DBStation.Ps
             var columns = content.Split(new string[] { "</td>" }, StringSplitOptions.RemoveEmptyEntries).ToList();
 
             ret.OrderId = GetOrderId(columns[1]);
-            ret.DHLTracingNo = DHLTracingNo(columns[3]);
-            ret.RecipientName = GetRecipientName(columns[5]);
-            ret.CnAddress = GetCnAddress(columns[7]);
-            ret.EMSTracingNo = GetEMSTracingNo(columns[8]);
+            ret.DHLTracingNo = DHLTracingNo(columns[4]);
+            ret.RecipientName = GetRecipientName(columns[6]);
+            ret.CnAddress = GetCnAddress(columns[8]);
+            ret.EMSTracingNo = GetEMSTracingNo(columns[9]);
 
-            ret.Remark = GetRemark(columns[9]);
+            ret.Remark = GetRemark(columns[10]);
 
             var remarkLines = ret.Remark.ToLines();
 
@@ -117,7 +117,7 @@ namespace nxprice_lib.Robot.DBStation.Ps
 
         private string GetOrderId(string input)
         {
-            return input.SubStringAfter(">", 1).SubStringBefore("<");
+            return input.SubStringAfter(">", 1).SubStringBefore("<").Trim();
         }
     }
 }
